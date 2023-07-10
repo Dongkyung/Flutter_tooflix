@@ -14,6 +14,7 @@ class App extends StatefulWidget {
 class _AppState extends State<App> {
   int counter = 0;
   List<int> numbers = [];
+  bool showTitle = true;
 
   void onClicked() {
     setState(() {
@@ -22,38 +23,72 @@ class _AppState extends State<App> {
     });
   }
 
+  void toggleTitle() {
+    setState(() {
+      showTitle = !showTitle;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      theme: ThemeData(
+        textTheme: const TextTheme(
+          titleLarge: TextStyle(
+            color: Colors.red,
+          ),
+        ),
+      ),
       home: Scaffold(
         backgroundColor: const Color(0xFFF4EDDB),
         body: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Text(
-                'Click Count',
-                style: TextStyle(
-                  fontSize: 30,
-                ),
-              ),
-              Text(
-                '$counter',
-                style: const TextStyle(
-                  fontSize: 30,
-                ),
-              ),
-              for (int n in numbers) Text('$n'),
+              showTitle ? const MyLargeTitle() : const Text('nothing'),
               IconButton(
-                iconSize: 40,
-                onPressed: onClicked,
-                icon: const Icon(
-                  Icons.add_box_rounded,
-                ),
-              ),
+                  onPressed: toggleTitle,
+                  icon: const Icon(Icons.remove_red_eye))
             ],
           ),
         ),
+      ),
+    );
+  }
+}
+
+class MyLargeTitle extends StatefulWidget {
+  const MyLargeTitle({
+    super.key,
+  });
+
+  @override
+  State<MyLargeTitle> createState() => _MyLargeTitleState();
+}
+
+class _MyLargeTitleState extends State<MyLargeTitle> {
+  @override
+  void initState() {
+    //build 이전에 호출되는 메서드, 변수초기화, API호출 등..
+    super.initState();
+    print('initState!');
+  }
+
+  @override
+  void dispose() {
+    //위젯이 스크린에수 제거될때 호출되는 메서드
+    super.dispose();
+    print('dispose!');
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    print('build!');
+    return Text(
+      'My Large Tatle',
+      style: TextStyle(
+        fontSize: 30,
+        color: Theme.of(context).textTheme.titleLarge?.color,
       ),
     );
   }
