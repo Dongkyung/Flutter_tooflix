@@ -44,6 +44,16 @@ class _HomeScreenState extends State<HomeScreen> {
     });
   }
 
+  void onReset() {
+    if (isRunning) {
+      timer.cancel();
+      isRunning = false;
+    }
+    setState(() {
+      totalSeconds = twentyFiveMinutes;
+    });
+  }
+
   String format(int seconds) {
     var duration = Duration(seconds: seconds);
     List<String> timedivide = duration.toString().split(".").first.split(":");
@@ -72,15 +82,24 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           Flexible(
             flex: 3,
-            child: Center(
-              child: IconButton(
-                iconSize: 120,
-                color: Theme.of(context).cardColor,
-                onPressed: isRunning ? onPausePressed : onStartPressed,
-                icon: isRunning
-                    ? const Icon(Icons.pause_circle_outline)
-                    : const Icon(Icons.play_circle_outline),
-              ),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                IconButton(
+                  iconSize: 100,
+                  color: Theme.of(context).cardColor,
+                  onPressed: isRunning ? onPausePressed : onStartPressed,
+                  icon: isRunning
+                      ? const Icon(Icons.pause_circle_outline)
+                      : const Icon(Icons.play_circle_outline),
+                ),
+                IconButton(
+                  iconSize: 70,
+                  color: Theme.of(context).cardColor,
+                  onPressed: onReset,
+                  icon: const Icon(Icons.refresh_outlined),
+                ),
+              ],
             ),
           ),
           Flexible(
