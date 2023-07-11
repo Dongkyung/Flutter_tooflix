@@ -107,34 +107,37 @@ class _HomeScreenState extends State<HomeScreen> {
             child: Row(
               children: [
                 Expanded(
-                  child: Container(
-                    decoration: BoxDecoration(
-                        color: Theme.of(context).cardColor,
-                        borderRadius: BorderRadius.circular(50)),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          'Pomodors',
-                          style: TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.w600,
-                              color: Theme.of(context)
-                                  .textTheme
-                                  .displayLarge!
-                                  .color),
-                        ),
-                        Text(
-                          '$totalPomodoros',
-                          style: TextStyle(
-                              fontSize: 58,
-                              fontWeight: FontWeight.w600,
-                              color: Theme.of(context)
-                                  .textTheme
-                                  .displayLarge!
-                                  .color),
-                        ),
-                      ],
+                  child: Transform.translate(
+                    offset: const Offset(0, 30),
+                    child: Container(
+                      decoration: BoxDecoration(
+                          color: Theme.of(context).cardColor,
+                          borderRadius: BorderRadius.circular(40)),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            'Pomodors',
+                            style: TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.w600,
+                                color: Theme.of(context)
+                                    .textTheme
+                                    .displayLarge!
+                                    .color),
+                          ),
+                          Text(
+                            '$totalPomodoros',
+                            style: TextStyle(
+                                fontSize: 58,
+                                fontWeight: FontWeight.w600,
+                                color: Theme.of(context)
+                                    .textTheme
+                                    .displayLarge!
+                                    .color),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ),
